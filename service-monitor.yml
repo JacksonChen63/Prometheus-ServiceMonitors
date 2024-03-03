@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: my-app
+  labels:
+    team: devops
+    release: prometheus-stack #This label allows Prometheus to find service monitors in the cluster and register them.
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  endpoints:
+  - port: web
+    path: /metrics
+    interval: 15s
